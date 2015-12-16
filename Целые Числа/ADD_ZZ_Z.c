@@ -8,25 +8,20 @@
 
 // Выполняет сложение целых чисел
 // Мезенцев, Цветков - 4306
-#include "ABS_Z_N.c"
-#include "POZ_Z_D.c"
-#include "COM_NN_D.c"
-#include "ADD_NN_N.c"
-#include "SUB_NN_N.c"
-#include "MUL_Z - _Z.c"
+#include "../build/main.h"
 
-struct INTEGER SUB_ZZ_Z(struct INTEGER summand1, struct INTEGER summand2)  // result = summand1 + summand2
+struct INTEGER ADD_ZZ_Z(struct INTEGER A, struct INTEGER B)  // result = A + B
   {
   struct INTEGER result;
   /* Проверить числа на равенство */
-  if (COM_NN_D(ABS_Z_N(summand1), ABS_Z_N(summand2)) == 0)
+  if (COM_NN_D(A.natural_part, B.natural_part) == 0)
     {
     /* Числа равны по модулю */
-    if (POZ_Z_D(summand1) == POZ_Z_D(summand2))
+    if (POZ_Z_D(A) == POZ_Z_D(B))
       /* знаки одинаковы */
       {
-      result.natural_part = ADD_NN_N(ABS_Z_N(summand1), ABS_Z_N(summand2));
-      result.sign = summand1.sign;
+      result.natural_part = ADD_NN_N(A.natural_part, B.natural_part);
+      result.sign = A.sign;
       }
     else
       {
@@ -35,25 +30,23 @@ struct INTEGER SUB_ZZ_Z(struct INTEGER summand1, struct INTEGER summand2)  // re
       result.natural_part.number = (int*)malloc( sizeof(int) );
       result.natural_part.number[0] = 0;
       result.sign = 0;
-      
       }
     }
   else
     {
     /* Числа не равны */
-    if (POZ_Z_D(summand1) == POZ_Z_D(summand2))
+    if (POZ_Z_D(A) == POZ_Z_D(B))
       {
       /* Знаки совпадают */
-      result.natural_part = ADD_NN_N(ABS_Z_N(summand1), ABS_Z_N(summand2));
-      result.sign = POZ_Z_D(summand1);
+      result.natural_part = ADD_NN_N(A.natural_part, B.natural_part);
+      result.sign = POZ_Z_D(A);
       }
     else
       {
       /* Знаки разные */
-      result.natural_part = SUB_NN_N(ABS_Z_N(summand1), ABS_Z_N(summand2));
-      result.sign = POZ_Z_D(summand1);
+      result.natural_part = SUB_NN_N(A.natural_part, B.natural_part);
+      result.sign = POZ_Z_D(A);
       }
     }
-
   return result;
   }

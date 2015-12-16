@@ -7,10 +7,11 @@
 
 // Используемые функции: 
 // COM_NN_D		NZER_N_B		MOD_NN_N
+#include "../build/main.h"
 
-NATURAL GCF_NN_N (NATURAL A, NATURAL B)
+struct NATURAL GCF_NN_N (struct NATURAL A, struct NATURAL B)
 {
-	NATURAL C; 
+	struct NATURAL C;
 	if (COM_NN_D (A, B) == 1)
 	{
 		C = A;
@@ -19,7 +20,7 @@ NATURAL GCF_NN_N (NATURAL A, NATURAL B)
 	}
 	else
 		C = A;
-	while (NZER_N_B (C) == 1)
+	while (NZER_N_B(C))
 	{
 		C = MOD_NN_N (A, B);
 		A = B;
