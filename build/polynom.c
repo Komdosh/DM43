@@ -3,6 +3,7 @@
 
 int menuItemPolynom()
   {
+	  system("cls");
 	  printf("1. %s\n", "Ввод полиномов");
 	  printf("2. %s\n", "Вывод рациональных чисел");
 	  printf("3. %s\n", "Сложение многочленов");

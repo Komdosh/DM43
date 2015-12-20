@@ -3,6 +3,7 @@
 
 int menuItemRational()
   {
+	  system("cls");
 	  printf("1. %s\n", "Ввод рациональных чисел");
 	  printf("2. %s\n", "Вывод рациональных чисел");
 	  printf("3. %s\n", "Сокращение дроби");

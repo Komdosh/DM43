@@ -1,4 +1,5 @@
 #include "../build/main.h"
+
 int output_Q(struct RATIONAL A)
 {
 	//printf("Числитель:\n");

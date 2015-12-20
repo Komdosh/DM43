@@ -3,6 +3,7 @@
 
 int menuItemInteger()
   {
+	  system("cls");
 	  printf("1. %s\n", "Ввод целых чисел");
 	  printf("2. %s\n", "Вывод целых чисел");
 	  printf("3. %s\n", "Абсолютная величина числа");
