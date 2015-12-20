@@ -1,11 +1,14 @@
 #include "../build/main.h"
+
 struct NATURAL MUL_ND_N(struct NATURAL A, int k)
 {
-	struct NATURAL res; int i, p;
+	struct NATURAL res; 
+	int i, p;
 	if (!k)
 	{
 		res.index = 1;
 		res.number = (int *)calloc(res.index, sizeof(int));
+		res.number[0] = 0;
 		return res;
 	}
 	res.index = A.index + 1;

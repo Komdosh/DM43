@@ -2,28 +2,44 @@
 #include "inputs.h"
 
 int menuItemNatural()
-  {
-	  system("cls");
-	  printf("1. %s\n", "Ввод натуральных чисел");
-	  printf("2. %s\n", "Вывод натуральных чисел");
-	  printf("3. %s\n", "Сравнение чисел");
-	  printf("4. %s\n", "Проверка на равенство нулю");
-	  printf("5. %s\n", "Добавление единицы");
-	  printf("6. %s\n", "Сложение");
-	  printf("7. %s\n", "Вычитание");
-	  printf("8. %s\n", "Умножение на цифру");
-	  printf("9. %s\n", "Умножение на 10 в степени k");
-	  printf("10. %s\n", "Умножение чисел");
-	  printf("11. %s\n", "Вычитание числа, умноженного на цифру");
-	  printf("12. %s\n", "Вычисления первой цифры деления большего\n    натурального на меньшее, домноженное на 10^k");
-	  printf("13. %s\n", "Частное от деления");
-	  printf("14. %s\n", "Остаток от деления");
-	  printf("15. %s\n", "НОД двух чисел");
-	  printf("16. %s\n", "НОК двух чисел");
-	  printf("17. %s\n", "Возврат в меню");
+{
+	system("cls");
+	printf("1. %s\n", "Ввод натуральных чисел");
+	printf("2. %s\n", "Вывод натуральных чисел");
+	printf("3. %s\n", "Сравнение чисел");
+	printf("4. %s\n", "Проверка на равенство нулю");
+	printf("5. %s\n", "Добавление единицы");
+	printf("6. %s\n", "Сложение");
+	printf("7. %s\n", "Вычитание");
+	printf("8. %s\n", "Умножение на цифру");
+	printf("9. %s\n", "Умножение на 10 в степени k");
+	printf("10. %s\n", "Умножение чисел");
+	printf("11. %s\n", "Вычитание числа, умноженного на цифру");
+	printf("12. %s\n", "Вычисления первой цифры деления большего\n    натурального на меньшее, домноженное на 10^k");
+	printf("13. %s\n", "Частное от деления");
+	printf("14. %s\n", "Остаток от деления");
+	printf("15. %s\n", "НОД двух чисел");
+	printf("16. %s\n", "НОК двух чисел");
+	printf("17. %s\n", "Возврат в меню");
 
-	  return enterIntNumInterval(1,17);
-  }
+	return enterIntNumInterval(1, 17);
+}
+
+struct NATURAL debInp(int a, int n)//Временный ввод для дебага
+{
+	struct NATURAL input, reverse;
+	input.index = n;
+	input.number = (int*)malloc(input.index*sizeof(int));
+	for (int i = 0; i < input.index; ++i)
+		input.number[i] = i+1;
+	if (a)
+		return input;
+	reverse.index = input.index;
+	reverse.number = (int*)malloc(reverse.index*sizeof(int));
+		for (int i = 0; i < reverse.index; ++i)
+			reverse.number[i] = input.number[input.index - 1 - i];
+	return reverse;
+}
 
 int menuNatural(struct NATURAL* nats)
 {
@@ -34,6 +50,8 @@ int menuNatural(struct NATURAL* nats)
 		nats[i].index = 0;
 	//nats[0] = ENNAT();
 	//nats[1] = ENNAT();
+	nats[0] = debInp(1, 5);
+	nats[1] = debInp(0, 4);
 	do
 	{
 		item = menuItemNatural();
@@ -43,7 +61,7 @@ int menuNatural(struct NATURAL* nats)
 		case 1:
 			ch = enterCharInterval('A', 'B', "Выберите число для ввода (A, B): ");
 			printf("Введите число %c>0:", ch);
-			nats[ch-65] = ENNAT();
+			nats[ch - 65] = ENNAT();
 			break;
 
 		case 2:
@@ -61,23 +79,24 @@ int menuNatural(struct NATURAL* nats)
 		case 3:
 			ch = enterCharInterval('A', 'C', "Выберите первое сравнимое число (A, B или C): ");
 			ch1 = enterCharInterval('A', 'C', "Выберите второе сравнимое число (A, B или C): ");
-			switch (COM_NN_D(nats[ch-65], nats[ch1-65]))
+			switch (COM_NN_D(nats[ch - 65], nats[ch1 - 65]))
 			{
-				case 0:
-					printf("%c=%c", ch, ch1);
-					break;
-				case 1:
-					printf("%c>%c", ch, ch1);
-					break;
-				case 2:
-					printf("%c<%c", ch, ch1);
-					break;
+			case 0:
+				printf("%c=%c", ch, ch1);
+				break;
+			case 1:
+				printf("%c>%c", ch, ch1);
+				break;
+			case 2:
+				printf("%c<%c", ch, ch1);
+				break;
 			}
+			printf("\n");
 			break;
 
 		case 4:
 			ch = enterCharInterval('A', 'C', "Выберите проверяемое число (A, B или C): ");
-			printf("Число %c %s равно нулю\n", ch, (NZER_N_B(nats[ch-65])) ? "" : "не");
+			printf("Число %c %s равно нулю\n", ch, (NZER_N_B(nats[ch - 65])) ? "" : "не");
 			break;
 
 		case 5:
@@ -102,7 +121,7 @@ int menuNatural(struct NATURAL* nats)
 		case 9:
 			ch = enterCharInterval('A', 'C', "Выберите число для умножения на 10^k (A, B или C): ");
 			printf("Введите число k (от %d, до %d) ", tMin, tMax);
-			nats[ch - 65] = MUL_Nk_N(nats[ch-65], enterIntNumInterval(tMin, tMax));
+			nats[ch - 65] = MUL_Nk_N(nats[ch - 65], enterIntNumInterval(tMin, tMax));
 			break;
 
 		case 10:

@@ -1,5 +1,5 @@
 // Подключаемые модули:
-// COM_NN_D - не потребовался (???)
+// COM_NN_D - сравнение натуральных чисел
 // Сидельников, Яшина - 4307
 
 // Выполняет сложение натуральных чисел
@@ -25,7 +25,7 @@ struct NATURAL ADD_NN_N(struct NATURAL A, struct NATURAL B)
 		if ((t.number[i] + (*tm).number[i]) > 9) // проверка, нужно ли делать перенос
 		{
 			t.number[i] = ((t.number[i] + (*tm).number[i]) - 10);
-			if (i == t.index - 1 && t.index!=(*tm).index) // является ли цифра последней при проверке
+			if (i == (t.index - 1))// является ли цифра последней при проверке
 			{
 				t.number = (int*)realloc(t.number, (t.index + 1)*sizeof(int));
 				t.number[t.index++] = 1;  // увеличиваем кол-во разрядов на 1

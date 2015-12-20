@@ -9,7 +9,7 @@ struct NATURAL ENNAT()
 	int i = 0, b=1;
 	char ch;
 	ch = '\0';
-	/*getchar();
+	getchar();
 	do
 	{
 		ch = getchar();
@@ -36,11 +36,7 @@ struct NATURAL ENNAT()
 					input.index = 0;
 					fflush(stdin);
 				}
-	} while (b);*/
-	input.index = 5;
-	input.number = (int*)malloc(input.index*sizeof(int));
-	for (int i = 0; i < input.index; ++i)
-		input.number[i] = i + 1;
+	} while (b);
 	reverse.index = input.index;
 	reverse.number = (int*)malloc(reverse.index*sizeof(int));
 	for (int i = 0; i < reverse.index; ++i)
