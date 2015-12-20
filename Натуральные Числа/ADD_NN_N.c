@@ -7,26 +7,34 @@
 
 struct NATURAL ADD_NN_N(struct NATURAL A, struct NATURAL B)
 {
-	int min = (COM_NN_D(A, B)==2) ? B.index : A.index;
+	int min = (COM_NN_D(A, B) == 2) ? B.index : A.index;
 	int i; // flag - проверка на успешность выполнения операции
-	struct NATURAL *t, *tm;
-	t = (COM_NN_D(A, B)==2) ? &A : &B;
-	tm = (t == &A) ? &B : &A;
+	struct NATURAL t, *tm;
+	if (COM_NN_D(A, B) == 2)
+	{
+		t = copyNatural(A);
+		tm = &B;
+	}
+	else
+	{
+		t = copyNatural(B);
+		tm = &A;
+	}
 	for (i = 0; i < min; i++)
 	{
-		if (((*t).number[i] + (*tm).number[i]) > 9) // проверка, нужно ли делать перенос
+		if ((t.number[i] + (*tm).number[i]) > 9) // проверка, нужно ли делать перенос
 		{
-			(*t).number[i] = (((*t).number[i] + (*tm).number[i]) - 10);
-			if (i == (*t).index - 1 && (*t).index!=(*tm).index) // является ли цифра последней при проверке
+			t.number[i] = ((t.number[i] + (*tm).number[i]) - 10);
+			if (i == t.index - 1 && t.index!=(*tm).index) // является ли цифра последней при проверке
 			{
-				(*t).number = (int*)realloc((*t).number, ((*t).index + 1)*sizeof(int));
-				(*t).number[(*t).index++] = 1;  // увеличиваем кол-во разрядов на 1
+				t.number = (int*)realloc(t.number, (t.index + 1)*sizeof(int));
+				t.number[t.index++] = 1;  // увеличиваем кол-во разрядов на 1
 			}
 			else // "единица в уме", если цифра не последняя 
-				(*t).number[i + 1]++;
+				t.number[i + 1]++;
 		}
 		else
-			(*t).number[i] = (*t).number[i] + (*tm).number[i]; // цифры складываются
+			t.number[i] = t.number[i] + (*tm).number[i]; // цифры складываются
 	}
-	return *t;
+	return t;
 }

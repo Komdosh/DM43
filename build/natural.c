@@ -140,4 +140,12 @@ int menuNatural(struct NATURAL* nats)
 	return 0;
 }
 
-
+struct NATURAL copyNatural(struct NATURAL A)
+{
+	struct NATURAL B;
+	B.index = A.index;
+	B.number = (int*)malloc(B.index*sizeof(int));
+	for (int i = 0; i < B.index; ++i)
+		B.number[i] = A.number[i];
+	return B;
+}
