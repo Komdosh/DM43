@@ -9,7 +9,7 @@ struct NATURAL ENNAT()
 	int i = 0, b=1;
 	char ch;
 	ch = '\0';
-	getchar();
+	//getchar();
 	do
 	{
 		ch = getchar();
