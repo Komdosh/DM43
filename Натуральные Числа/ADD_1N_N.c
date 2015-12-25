@@ -26,5 +26,5 @@ struct NATURAL ADD_1N_N(struct NATURAL A)
 			A.number[i]++; // единица успешно добавлена
 			flag = 1;
 		}
-	return A;
+	return A; //[eq
 }
