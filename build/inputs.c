@@ -6,37 +6,34 @@ struct NATURAL ENNAT()
 	struct NATURAL input, reverse;
 	input.index = 0;
 	input.number = NULL;
-	int i = 0, b=1;
+	int i = 0;
 	char ch;
-	ch = '\0';
-	getchar();
+
+	scanf("%*[^\n]");
 	do
 	{
 		ch = getchar();
-		if (ch == '\n' && input.index)
-			b = 0;
-		if (ch == '0' && input.index == 0 && b)
+		if (!input.index && ch=='0')
 		{
-			//printf("Число не может начинаться с 0!\nПовторите ввод:"); //пока не работает
-			fflush(stdin);
+			printf("Число не может начинаться с 0!\nПовторите ввод:");
+			scanf("%*[^\n]");
 		}
-		else
-			if (ch > 47 && ch < 58)
-			{
-				++input.index;
-				input.number = (int*)realloc(input.number, input.index*sizeof(int));
-				input.number[input.index - 1] = ch - 48;
-			}
-			else
-				if (ch != '\n')
-				{
-					printf("В строку попали посторонние символы!\nПовторите ввод:");
-					free(input.number);
-					input.number = NULL;
-					input.index = 0;
-					fflush(stdin);
-				}
-	} while (b);
+		else if (ch > 47 && ch < 58)
+		{
+			++input.index;
+			input.number = (int*)realloc(input.number, input.index*sizeof(int));
+			input.number[input.index - 1] = ch - 48;
+		}
+		else if (ch != '\n')
+		{
+			printf("В строку попали посторонние символы!\nПовторите ввод:");
+			free(input.number);
+			input.number = NULL;
+			input.index = 0;
+			scanf("%*[^\n]");
+		}
+	} while (ch!='\n' || !input.index);
+
 	reverse.index = input.index;
 	reverse.number = (int*)malloc(reverse.index*sizeof(int));
 	for (int i = 0; i < reverse.index; ++i)
@@ -75,15 +72,17 @@ struct POLYNOMIAL ENPOL()
 char enterCharInterval(char first, char last, char* str)
 {
 	char ch = 0;
-	ch = getchar();
+	printf("%s", str);
+
 	do
 	{
-		printf("%s", str);
+		getchar();
 		ch = getchar();
-		if (ch < first || ch > last)
+		if ((ch < first || ch > last) && ch!='\n')
 		{
 			printf("Неверный ввод!\n");
-			fflush(stdin);
+			printf("%s", str);
+			scanf("%*[^\n]");
 		}
 	} while (ch < first || ch > last);
 	return ch;

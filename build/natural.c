@@ -50,8 +50,8 @@ int menuNatural(struct NATURAL* nats)
 		nats[i].index = 0;
 	//nats[0] = ENNAT();
 	//nats[1] = ENNAT();
-	nats[0] = debInp(1, 5);
-	nats[1] = debInp(0, 4);
+	//nats[0] = debInp(1, 5);
+	//nats[1] = debInp(0, 4);
 	do
 	{
 		item = menuItemNatural();
